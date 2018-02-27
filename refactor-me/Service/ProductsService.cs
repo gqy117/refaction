@@ -15,31 +15,36 @@ namespace refactor_me.Service
         {
         }
 
-        public Products GetAll()
+        public IList<DTOs.Product> GetAll()
         {
-            return new Products();
+            var products = new Products();
+
+            return this.Mapper.Map<List<DTOs.Product>>(products.Items);
         }
 
-        public Products SearchByName(string name)
+        public IList<DTOs.Product> SearchByName(string name)
         {
-            return new Products(name);
+            var products = new Products(name);
+
+            return this.Mapper.Map<List<DTOs.Product>>(products.Items);
         }
 
-        public Product GetProduct(Guid id)
+        public DTOs.Product GetProduct(Guid id)
         {
             var product = new Product(id);
             if (product.IsNew)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return product;
+            return this.Mapper.Map<DTOs.Product>(product);
         }
 
-        public void Create(Product product)
+        public void Create(DTOs.Product product)
         {
-            product.Save();
+            var newProduct = this.Mapper.Map<Models.Product>(product);
+            newProduct.Save();
         }
 
-        public void Update(Guid id, Product product)
+        public void Update(Guid id, DTOs.Product product)
         {
             var orig = new Product(id)
             {

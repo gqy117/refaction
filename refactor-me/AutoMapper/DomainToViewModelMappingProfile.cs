@@ -13,14 +13,14 @@ namespace refactor_me.AutoMapper
 
         private void MapProduct()
         {
-            CreateMap<Models.Product, DTOs.Product>();
-            CreateMap<IList<Models.Product>, IList<DTOs.Product>>();
+            CreateMap<Models.Product, DTOs.Product>().ReverseMap();
+            CreateMap<List<Models.Product>, List<DTOs.Product>>().ReverseMap();
         }
 
         private void MapProductOption()
         {
-            CreateMap<Models.ProductOption, DTOs.ProductOption>();
-            CreateMap<IList<Models.ProductOption>, IList<DTOs.ProductOption>>();
+            CreateMap<Models.ProductOption, DTOs.ProductOption>().ReverseMap();
+            CreateMap<List<Models.ProductOption>, List<DTOs.ProductOption>>().ReverseMap();
         }
     }
 }

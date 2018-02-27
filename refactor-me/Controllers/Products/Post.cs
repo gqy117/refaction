@@ -1,5 +1,4 @@
 ﻿using System.Web.Http;
-using refactor_me.Models;
 
 namespace refactor_me.Controllers
 {
@@ -7,7 +6,7 @@ namespace refactor_me.Controllers
     {
         [Route]
         [HttpPost]
-        public void Create(Product product)
+        public void Create(DTOs.Product product)
         {
             this.ProductsService.Create(product);
         }
