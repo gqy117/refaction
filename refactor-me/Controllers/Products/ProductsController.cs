@@ -9,6 +9,11 @@ namespace refactor_me.Controllers
     [RoutePrefix(Consts.Products.ProductsRoute)]
     public partial class ProductsController : ApiController
     {
-        public ProductsService ProductsService { get; set; } = new ProductsService();
+        private readonly ProductsService ProductsService;
+
+        public ProductsController(ProductsService productsService)
+        {
+            this.ProductsService = productsService;
+        }
     }
 }
