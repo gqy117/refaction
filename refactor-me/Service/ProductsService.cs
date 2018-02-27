@@ -4,12 +4,20 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Http;
+using AutoMapper;
 using refactor_me.Models;
 
 namespace refactor_me.Service
 {
     public class ProductsService
     {
+        private readonly IMapper Mapper;
+
+        public ProductsService(IMapper mapper)
+        {
+            this.Mapper = mapper;
+        }
+
         public Products GetAll()
         {
             return new Products();
