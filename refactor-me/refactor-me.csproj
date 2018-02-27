@@ -129,7 +129,7 @@
     <Compile Include="Service\Dependency\DependencyDTO.cs" />
     <Compile Include="Service\ProductOptionsService.cs" />
     <Compile Include="Service\ProductsService.cs" />
-    <Compile Include="Service\ServiceBase.cs" />
+    <Compile Include="Service\Base\ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
