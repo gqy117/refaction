@@ -94,7 +94,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Consts\ProductOptions.cs" />
     <Compile Include="Consts\Products.cs" />
-    <Compile Include="Controllers\ProductOptionsController.cs" />
+    <Compile Include="Controllers\ProductOptions\Delete.cs" />
+    <Compile Include="Controllers\ProductOptions\Put.cs" />
+    <Compile Include="Controllers\ProductOptions\Post.cs" />
+    <Compile Include="Controllers\ProductOptions\Get.cs" />
+    <Compile Include="Controllers\ProductOptions\ProductOptionsController.cs" />
     <Compile Include="Controllers\Products\Get.cs" />
     <Compile Include="Controllers\Products\Post.cs" />
     <Compile Include="Controllers\Products\Put.cs" />
