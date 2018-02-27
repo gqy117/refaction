@@ -17,9 +17,9 @@ namespace refactor_me.Service
 
         public IList<DTOs.Product> GetAll()
         {
-            var products = new Products();
+            var products = this.DBContext.Products.ToList();
 
-            return this.Mapper.Map<List<DTOs.Product>>(products.Items);
+            return this.Mapper.Map<List<DTOs.Product>>(products);
         }
 
         public IList<DTOs.Product> SearchByName(string name)

@@ -5,6 +5,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using AutoMapper;
 using refactor_me.AutoMapper;
+using refactor_me.Models;
 using refactor_me.Service;
 
 namespace refactor_me.Config
@@ -29,10 +30,17 @@ namespace refactor_me.Config
 
         private static void RegisterServices(ContainerBuilder builder)
         {
+            RegisterDBContext(builder);
+
             builder.RegisterType<DomainToViewModelMappingProfile>();
             builder.RegisterType<DependencyDTO>();
             builder.RegisterType<ProductsService>();
             builder.RegisterType<ProductOptionsService>();
+        }
+
+        private static void RegisterDBContext(ContainerBuilder builder)
+        {
+            builder.RegisterType<RefactorContext>().InstancePerRequest();
         }
 
         private static void RegisterAutoMapper(ContainerBuilder builder)
