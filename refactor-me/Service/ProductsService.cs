@@ -11,7 +11,7 @@ namespace refactor_me.Service
 {
     public class ProductsService : ServiceBase
     {
-        public ProductsService(IMapper mapper) : base(mapper)
+        public ProductsService(DependencyDTO dependencies) : base(dependencies)
         {
         }
 

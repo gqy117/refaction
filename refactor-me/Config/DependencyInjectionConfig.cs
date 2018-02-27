@@ -20,6 +20,7 @@ namespace refactor_me.Config
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<DomainToViewModelMappingProfile>();
+            builder.RegisterType<DependencyDTO>();
             builder.RegisterType<ProductsService>();
             builder.RegisterType<ProductOptionsService>();
 

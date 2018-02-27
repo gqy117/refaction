@@ -8,11 +8,13 @@ namespace refactor_me.Service
 {
     public abstract class ServiceBase
     {
+        protected readonly DependencyDTO DependencyDTO;
         protected readonly IMapper Mapper;
 
-        protected ServiceBase(IMapper mapper)
+        public ServiceBase(DependencyDTO dependencyDTO)
         {
-            this.Mapper = mapper;
+            this.DependencyDTO = dependencyDTO;
+            this.Mapper = this.DependencyDTO.Mapper;
         }
     }
 }

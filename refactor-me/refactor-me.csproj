@@ -126,6 +126,7 @@
     <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Dependency\DependencyDTO.cs" />
     <Compile Include="Service\ProductOptionsService.cs" />
     <Compile Include="Service\ProductsService.cs" />
     <Compile Include="Service\ServiceBase.cs" />
