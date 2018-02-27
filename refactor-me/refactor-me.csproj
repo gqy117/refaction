@@ -104,6 +104,8 @@
     <Compile Include="Controllers\Products\Put.cs" />
     <Compile Include="Controllers\Products\Delete.cs" />
     <Compile Include="Controllers\Products\ProductsController.cs" />
+    <Compile Include="DTOs\Product.cs" />
+    <Compile Include="DTOs\ProductOption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
