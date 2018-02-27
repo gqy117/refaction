@@ -9,13 +9,10 @@ using refactor_me.Models;
 
 namespace refactor_me.Service
 {
-    public class ProductOptionsService
+    public class ProductOptionsService : ServiceBase
     {
-        private readonly IMapper Mapper;
-
-        public ProductOptionsService(IMapper mapper)
+        public ProductOptionsService(IMapper mapper) : base(mapper)
         {
-            this.Mapper = mapper;
         }
 
         public ProductOptions GetOptions(Guid productId)
