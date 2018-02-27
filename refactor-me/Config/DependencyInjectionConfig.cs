@@ -19,15 +19,20 @@ namespace refactor_me.Config
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-            builder.RegisterType<DomainToViewModelMappingProfile>();
-            builder.RegisterType<DependencyDTO>();
-            builder.RegisterType<ProductsService>();
-            builder.RegisterType<ProductOptionsService>();
+            RegisterServices(builder);
 
             RegisterAutoMapper(builder);
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+
+        private static void RegisterServices(ContainerBuilder builder)
+        {
+            builder.RegisterType<DomainToViewModelMappingProfile>();
+            builder.RegisterType<DependencyDTO>();
+            builder.RegisterType<ProductsService>();
+            builder.RegisterType<ProductOptionsService>();
         }
 
         private static void RegisterAutoMapper(ContainerBuilder builder)
