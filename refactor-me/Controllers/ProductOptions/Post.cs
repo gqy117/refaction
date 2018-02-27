@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using refactor_me.DTOs;
 
 namespace refactor_me.Controllers
 {
@@ -7,7 +8,7 @@ namespace refactor_me.Controllers
     {
         [Route]
         [HttpPost]
-        public void CreateOption(Guid productId, DTOs.ProductOption option)
+        public void CreateOption(Guid productId, ProductOption option)
         {
             this.ProductOptionsService.CreateOption(productId, option);
         }

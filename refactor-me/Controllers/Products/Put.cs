@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Http;
+using refactor_me.DTOs;
 
 namespace refactor_me.Controllers
 {
@@ -7,7 +8,7 @@ namespace refactor_me.Controllers
     {
         [Route(Consts.Products.Id)]
         [HttpPut]
-        public void Update(Guid id, DTOs.Product product)
+        public void Update(Guid id, Product product)
         {
             this.ProductsService.Update(id, product);
         }
