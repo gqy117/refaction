@@ -5,7 +5,7 @@ using refactor_me.Models;
 
 namespace refactor_me.Controllers
 {
-    [RoutePrefix("products")]
+    [RoutePrefix(Consts.Products.ProductsRoute)]
     public class ProductsController : ApiController
     {
         [Route]
@@ -22,7 +22,7 @@ namespace refactor_me.Controllers
             return new Products(name);
         }
 
-        [Route("{id}")]
+        [Route(Consts.Products.Id)]
         [HttpGet]
         public Product GetProduct(Guid id)
         {
@@ -40,7 +40,7 @@ namespace refactor_me.Controllers
             product.Save();
         }
 
-        [Route("{id}")]
+        [Route(Consts.Products.Id)]
         [HttpPut]
         public void Update(Guid id, Product product)
         {
@@ -56,7 +56,7 @@ namespace refactor_me.Controllers
                 orig.Save();
         }
 
-        [Route("{id}")]
+        [Route(Consts.Products.Id)]
         [HttpDelete]
         public void Delete(Guid id)
         {
