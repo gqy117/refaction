@@ -95,7 +95,11 @@
     <Compile Include="Consts\ProductOptions.cs" />
     <Compile Include="Consts\Products.cs" />
     <Compile Include="Controllers\ProductOptionsController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\Products\Get.cs" />
+    <Compile Include="Controllers\Products\Post.cs" />
+    <Compile Include="Controllers\Products\Put.cs" />
+    <Compile Include="Controllers\Products\Delete.cs" />
+    <Compile Include="Controllers\Products\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
