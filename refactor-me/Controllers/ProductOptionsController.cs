@@ -5,7 +5,7 @@ using refactor_me.Models;
 
 namespace refactor_me.Controllers
 {
-    [RoutePrefix(Consts.ProductOptions.ProductsRoute)]
+    [RoutePrefix(Consts.ProductOptions.ProductOptionsRoute)]
     public class ProductOptionsController : ApiController
     {
         [Route]
