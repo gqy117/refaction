@@ -15,27 +15,31 @@ namespace refactor_me.Service
         {
         }
 
-        public ProductOptions GetOptions(Guid productId)
+        public IList<DTOs.ProductOption> GetOptions(Guid productId)
         {
-            return new ProductOptions(productId);
+            var productionOptions = new ProductOptions(productId);
+
+            return this.Mapper.Map<List<DTOs.ProductOption>>(productionOptions.Items);
         }
 
-        public ProductOption GetOption(Guid id)
+        public DTOs.ProductOption GetOption(Guid id)
         {
             var option = new ProductOption(id);
             if (option.IsNew)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return option;
+            return this.Mapper.Map<DTOs.ProductOption>(option);
         }
 
-        public void CreateOption(Guid productId, ProductOption option)
+        public void CreateOption(Guid productId, DTOs.ProductOption option)
         {
-            option.ProductId = productId;
-            option.Save();
+            var newOption = this.Mapper.Map<Models.ProductOption>(option);
+
+            newOption.ProductId = productId;
+            newOption.Save();
         }
 
-        public void UpdateOption(Guid id, ProductOption option)
+        public void UpdateOption(Guid id, DTOs.ProductOption option)
         {
             var orig = new ProductOption(id)
             {
