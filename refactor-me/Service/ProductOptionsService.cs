@@ -36,6 +36,7 @@ namespace refactor_me.Service
 
         public void CreateOption(Guid productId, DTOs.ProductOption option)
         {
+            option.ProductId = productId;
             this.DBContext.ProductOptions.Add(this.Mapper.Map<ProductOption>(option));
 
             this.DBContext.SaveChanges();

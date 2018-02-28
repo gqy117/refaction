@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 
 namespace refactor_me.AutoMapper
@@ -18,7 +19,9 @@ namespace refactor_me.AutoMapper
 
         private void MapProductOption()
         {
-            CreateMap<Models.ProductOption, DTOs.ProductOption>().ReverseMap();
+            CreateMap<Models.ProductOption, DTOs.ProductOption>()
+                .ReverseMap()
+                .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => !(srcMember is Guid && (Guid)srcMember == Guid.Empty)));
         }
     }
 }
