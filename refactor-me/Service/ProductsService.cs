@@ -18,14 +18,12 @@ namespace refactor_me.Service
 
         public IList<DTOs.Product> GetAll()
         {
-            var products = this.DBContext.Products.ToList();
-
-            return this.Mapper.Map<List<DTOs.Product>>(products);
+            return this.Mapper.Map<List<DTOs.Product>>(this.DBContext.Products); ;
         }
 
         public IList<DTOs.Product> SearchByName(string name)
         {
-            var products = this.DBContext.Products.Where(x=>x.Name == name).ToList();
+            var products = this.DBContext.Products.Where(x => x.Name == name).ToList();
 
             return this.Mapper.Map<List<DTOs.Product>>(products);
         }
@@ -55,7 +53,7 @@ namespace refactor_me.Service
             {
                 this.Mapper.Map(newProduct, product);
 
-                this.DBContext.Entry(product).State = EntityState.Modified; 
+                this.DBContext.Entry(product).State = EntityState.Modified;
 
                 this.DBContext.SaveChanges();
             }
