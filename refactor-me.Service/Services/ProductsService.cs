@@ -45,9 +45,7 @@ namespace refactor_me.Service
             if (product != null)
             {
                 this.Mapper.Map(newProduct, product);
-
                 this.DBContext.Entry(product).State = EntityState.Modified;
-
                 this.DBContext.SaveChanges();
             }
         }

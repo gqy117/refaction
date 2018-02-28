@@ -51,14 +51,7 @@ namespace refactor_me.Service
 
         public void DeleteOption(Guid id)
         {
-            var option = this.DBContext.ProductOptions.Find(id);
-
-            if (option != null)
-            {
-                this.DBContext.ProductOptions.Remove(option);
-
-                this.DBContext.SaveChanges();
-            }
+            this.CRUDHelper.DeleteById(this.DBContext.ProductOptions, id);
         }
     }
 }
