@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="Base\CRUDHelper.cs" />
     <Compile Include="Base\ServiceBase.cs" />
     <Compile Include="Consts\ProductOptions.cs" />
     <Compile Include="Consts\Products.cs" />

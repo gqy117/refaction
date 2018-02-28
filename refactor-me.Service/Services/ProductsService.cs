@@ -54,14 +54,7 @@ namespace refactor_me.Service
 
         public void Delete(Guid id)
         {
-            var product = this.DBContext.Products.Find(id);
-
-            if (product != null)
-            {
-                this.DBContext.Products.Remove(product);
-
-                this.DBContext.SaveChanges();
-            }
+            this.CRUDHelper.DeleteById(this.DBContext.Products, id);
         }
     }
 }

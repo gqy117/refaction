@@ -7,11 +7,13 @@ namespace refactor_me.Service
     {
         public readonly IMapper Mapper;
         public readonly RefactorContext RefactorContext;
+        public readonly CRUDHelper CrudHelper;
 
-        public DependencyDTO(IMapper mapper, RefactorContext refactorContext)
+        public DependencyDTO(IMapper mapper, RefactorContext refactorContext, CRUDHelper crudHelper)
         {
             this.Mapper = mapper;
             this.RefactorContext = refactorContext;
+            this.CrudHelper = crudHelper;
         }
     }
 }

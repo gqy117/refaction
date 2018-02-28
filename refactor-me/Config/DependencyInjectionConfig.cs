@@ -24,7 +24,7 @@ namespace refactor_me.Config
             RegisterDBContext(builder);
             RegisterDTOs(builder);
             RegisterServices(builder);
-
+            RegisterHelpers(builder);
             RegisterAutoMapper(builder);
 
             var container = builder.Build();
@@ -41,6 +41,12 @@ namespace refactor_me.Config
         {
             builder.RegisterAssemblyTypes(typeof(ServiceBase).Assembly)
                 .Where(t => t.Name.EndsWith("Service"));
+        }
+
+        private static void RegisterHelpers(ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(typeof(ServiceBase).Assembly)
+                .Where(t => t.Name.EndsWith("Helper"));
         }
 
         private static void RegisterDBContext(ContainerBuilder builder)
