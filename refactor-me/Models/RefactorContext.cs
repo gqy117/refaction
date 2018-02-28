@@ -8,7 +8,7 @@ namespace refactor_me.Models
     public partial class RefactorContext : DbContext
     {
         public RefactorContext()
-            : base("name=RefactorContext1")
+            : base("name=RefactorContext")
         {
         }
 
