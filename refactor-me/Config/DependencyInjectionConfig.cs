@@ -20,6 +20,8 @@ namespace refactor_me.Config
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
+            RegisterDBContext(builder);
+            RegisterDTOs(builder);
             RegisterServices(builder);
 
             RegisterAutoMapper(builder);
@@ -28,14 +30,16 @@ namespace refactor_me.Config
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
+        private static void RegisterDTOs(ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(typeof(DependencyDTO).Assembly)
+                .Where(t => t.Name.EndsWith("DTO"));
+        }
+
         private static void RegisterServices(ContainerBuilder builder)
         {
-            RegisterDBContext(builder);
-
-            builder.RegisterType<DomainToViewModelMappingProfile>();
-            builder.RegisterType<DependencyDTO>();
-            builder.RegisterType<ProductsService>();
-            builder.RegisterType<ProductOptionsService>();
+            builder.RegisterAssemblyTypes(typeof(ServiceBase).Assembly)
+                .Where(t => t.Name.EndsWith("Service"));
         }
 
         private static void RegisterDBContext(ContainerBuilder builder)
@@ -46,7 +50,9 @@ namespace refactor_me.Config
         private static void RegisterAutoMapper(ContainerBuilder builder)
         {
             //register your profiles, or skip this if you don't want them in your container
-            builder.RegisterAssemblyTypes().AssignableTo(typeof(Profile));
+            builder.RegisterAssemblyTypes(typeof(DomainToViewModelMappingProfile).Assembly)
+                .Where(t => t.Name.EndsWith("Profile"))
+                .As<Profile>();
 
             //register your configuration as a single instance
             builder.Register(c => new MapperConfiguration(cfg =>
