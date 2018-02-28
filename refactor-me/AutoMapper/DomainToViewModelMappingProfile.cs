@@ -14,12 +14,12 @@ namespace refactor_me.AutoMapper
 
         private void MapProduct()
         {
-            CreateMap<Models.Product, DTOs.Product>().ReverseMap();
+            CreateMap<Repository.Product, DTOs.Product>().ReverseMap();
         }
 
         private void MapProductOption()
         {
-            CreateMap<Models.ProductOption, DTOs.ProductOption>()
+            CreateMap<Repository.ProductOption, DTOs.ProductOption>()
                 .ReverseMap()
                 .ForAllMembers(opts => opts.Condition((src, dest, srcMember) => !(srcMember is Guid && (Guid)srcMember == Guid.Empty)));
         }

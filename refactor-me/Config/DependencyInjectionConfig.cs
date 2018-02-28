@@ -6,7 +6,7 @@ using Autofac.Integration.WebApi;
 using AutoMapper;
 using AutoMapper.Mappers;
 using refactor_me.AutoMapper;
-using refactor_me.Models;
+using refactor_me.Repository;
 using refactor_me.Service;
 
 namespace refactor_me.Config

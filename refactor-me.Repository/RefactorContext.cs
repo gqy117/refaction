@@ -1,4 +1,4 @@
-namespace refactor_me.Models
+namespace refactor_me.Repository
 {
     using System;
     using System.Data.Entity;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using refactor_me.Models;
+using refactor_me.Repository;
 
 namespace refactor_me.Service
 {

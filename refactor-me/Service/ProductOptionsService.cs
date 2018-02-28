@@ -6,7 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Http;
 using AutoMapper;
-using refactor_me.Models;
+using refactor_me.Repository;
 
 namespace refactor_me.Service
 {
