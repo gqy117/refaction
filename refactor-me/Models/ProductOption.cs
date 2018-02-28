@@ -1,11 +1,13 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace refactor_me.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("ProductOption")]
-    public class ProductOption
+    public partial class ProductOption
     {
         public Guid Id { get; set; }
 
@@ -17,5 +19,7 @@ namespace refactor_me.Models
 
         [StringLength(500)]
         public string Description { get; set; }
+
+        public virtual Product Product { get; set; }
     }
 }

@@ -1,9 +1,11 @@
-using System.Data.Entity;
-using refactor_me.Models;
-
 namespace refactor_me.Models
 {
-    public class RefactorContext : DbContext
+    using System;
+    using System.Data.Entity;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+
+    public partial class RefactorContext : DbContext
     {
         public RefactorContext()
             : base("name=RefactorContext1")
@@ -15,6 +17,10 @@ namespace refactor_me.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.ProductOptions)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
         }
     }
 }
