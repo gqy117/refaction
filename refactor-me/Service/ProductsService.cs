@@ -31,7 +31,7 @@ namespace refactor_me.Service
 
         public DTOs.Product GetProduct(Guid id)
         {
-            var product = this.DBContext.Products.SingleOrDefault(x => x.Id == id);
+            var product = this.DBContext.Products.Find(id);
 
             if (product == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
@@ -42,21 +42,23 @@ namespace refactor_me.Service
         public void Create(DTOs.Product product)
         {
             var newProduct = new Models.Product();
-            this.Mapper.Map<DTOs.Product, Models.Product>(product, newProduct);
+            this.Mapper.Map(product, newProduct);
             this.DBContext.Products.Add(newProduct);
 
             this.DBContext.SaveChanges();
         }
 
-        public void Update(Guid id, DTOs.Product product)
+        public void Update(Guid id, DTOs.Product newProduct)
         {
             var orig = new Product(id)
             {
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                DeliveryPrice = product.DeliveryPrice
+                Name = newProduct.Name,
+                Description = newProduct.Description,
+                Price = newProduct.Price,
+                DeliveryPrice = newProduct.DeliveryPrice
             };
+
+            var product = this.DBContext.Products.SingleOrDefault(x => x.Id == newProduct.Id);
 
             if (!orig.IsNew)
                 orig.Save();
