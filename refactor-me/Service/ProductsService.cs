@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -24,9 +25,9 @@ namespace refactor_me.Service
 
         public IList<DTOs.Product> SearchByName(string name)
         {
-            var products = new Products(name);
+            var products = this.DBContext.Products.Where(x=>x.Name == name).ToList();
 
-            return this.Mapper.Map<List<DTOs.Product>>(products.Items);
+            return this.Mapper.Map<List<DTOs.Product>>(products);
         }
 
         public DTOs.Product GetProduct(Guid id)
@@ -50,24 +51,28 @@ namespace refactor_me.Service
 
         public void Update(Guid id, DTOs.Product newProduct)
         {
-            var orig = new Product(id)
+            var product = this.DBContext.Products.Find(newProduct.Id);
+
+            if (product != null)
             {
-                Name = newProduct.Name,
-                Description = newProduct.Description,
-                Price = newProduct.Price,
-                DeliveryPrice = newProduct.DeliveryPrice
-            };
+                this.Mapper.Map(newProduct, product);
 
-            var product = this.DBContext.Products.SingleOrDefault(x => x.Id == newProduct.Id);
+                this.DBContext.Entry(product).State = EntityState.Modified; 
 
-            if (!orig.IsNew)
-                orig.Save();
+                this.DBContext.SaveChanges();
+            }
         }
 
         public void Delete(Guid id)
         {
-            var product = new Product(id);
-            product.Delete();
+            var product = this.DBContext.Products.Find(id);
+
+            if (product != null)
+            {
+                this.DBContext.Products.Remove(product);
+
+                this.DBContext.SaveChanges();
+            }
         }
     }
 }
