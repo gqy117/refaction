@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,15 +18,17 @@ namespace refactor_me.Service
 
         public IList<DTOs.ProductOption> GetOptions(Guid productId)
         {
-            var productionOptions = new ProductOptions(productId);
+            var product = this.DBContext.Products.Find(productId);
+            var options = product.ProductOptions.ToList();
 
-            return this.Mapper.Map<List<DTOs.ProductOption>>(productionOptions.Items);
+            return this.Mapper.Map<List<DTOs.ProductOption>>(options);
         }
 
         public DTOs.ProductOption GetOption(Guid id)
         {
-            var option = new ProductOption(id);
-            if (option.IsNew)
+            var option = this.DBContext.ProductOptions.Find(id);
+
+            if (option == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
             return this.Mapper.Map<DTOs.ProductOption>(option);
@@ -33,28 +36,33 @@ namespace refactor_me.Service
 
         public void CreateOption(Guid productId, DTOs.ProductOption option)
         {
-            var newOption = this.Mapper.Map<Models.ProductOption>(option);
+            this.DBContext.ProductOptions.Add(this.Mapper.Map<ProductOption>(option));
 
-            newOption.ProductId = productId;
-            newOption.Save();
+            this.DBContext.SaveChanges();
         }
 
-        public void UpdateOption(Guid id, DTOs.ProductOption option)
+        public void UpdateOption(Guid id, DTOs.ProductOption newOption)
         {
-            var orig = new ProductOption(id)
-            {
-                Name = option.Name,
-                Description = option.Description
-            };
+            var option = this.DBContext.ProductOptions.Find(id);
 
-            if (!orig.IsNew)
-                orig.Save();
+            if (option != null)
+            {
+                this.Mapper.Map(newOption, option);
+                this.DBContext.Entry(option).State = EntityState.Modified;
+                this.DBContext.SaveChanges();
+            }
         }
 
         public void DeleteOption(Guid id)
         {
-            var opt = new ProductOption(id);
-            opt.Delete();
+            var option = this.DBContext.ProductOptions.Find(id);
+
+            if (option != null)
+            {
+                this.DBContext.ProductOptions.Remove(option);
+
+                this.DBContext.SaveChanges();
+            }
         }
     }
 }

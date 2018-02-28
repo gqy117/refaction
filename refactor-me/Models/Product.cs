@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,5 +20,7 @@ namespace refactor_me.Models
         public decimal Price { get; set; }
 
         public decimal DeliveryPrice { get; set; }
+
+        public virtual ICollection<ProductOption> ProductOptions { get; set; }
     }
 }
