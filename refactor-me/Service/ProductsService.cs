@@ -42,9 +42,7 @@ namespace refactor_me.Service
 
         public void Create(DTOs.Product product)
         {
-            var newProduct = new Models.Product();
-            this.Mapper.Map(product, newProduct);
-            this.DBContext.Products.Add(newProduct);
+            this.DBContext.Products.Add(this.Mapper.Map<Product>(product));
 
             this.DBContext.SaveChanges();
         }
