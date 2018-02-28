@@ -58,8 +58,8 @@
     <Compile Include="Dependency\DependencyDTO.cs" />
     <Compile Include="DTOs\Product.cs" />
     <Compile Include="DTOs\ProductOption.cs" />
-    <Compile Include="ProductOptionsService.cs" />
-    <Compile Include="ProductsService.cs" />
+    <Compile Include="Services\ProductOptionsService.cs" />
+    <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
