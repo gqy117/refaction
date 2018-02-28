@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Http;
-using AutoMapper;
 using refactor_me.Repository;
 
 namespace refactor_me.Service
@@ -31,9 +27,6 @@ namespace refactor_me.Service
         public DTOs.Product GetProduct(Guid id)
         {
             var product = this.DBContext.Products.Find(id);
-
-            if (product == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
 
             return this.Mapper.Map<DTOs.Product>(product);
         }

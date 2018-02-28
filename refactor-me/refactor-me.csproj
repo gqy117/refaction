@@ -111,10 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AutoMapper\DomainToViewModelMappingProfile.cs" />
     <Compile Include="Config\DependencyInjectionConfig.cs" />
-    <Compile Include="Consts\ProductOptions.cs" />
-    <Compile Include="Consts\Products.cs" />
     <Compile Include="Controllers\ProductOptions\Delete.cs" />
     <Compile Include="Controllers\ProductOptions\Put.cs" />
     <Compile Include="Controllers\ProductOptions\Post.cs" />
@@ -125,16 +122,10 @@
     <Compile Include="Controllers\Products\Put.cs" />
     <Compile Include="Controllers\Products\Delete.cs" />
     <Compile Include="Controllers\Products\ProductsController.cs" />
-    <Compile Include="DTOs\Product.cs" />
-    <Compile Include="DTOs\ProductOption.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Dependency\DependencyDTO.cs" />
-    <Compile Include="Service\ProductOptionsService.cs" />
-    <Compile Include="Service\ProductsService.cs" />
-    <Compile Include="Service\Base\ServiceBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -149,6 +140,10 @@
     <ProjectReference Include="..\refactor-me.Repository\refactor-me.Repository.csproj">
       <Project>{d20a9df7-1551-46db-9c9f-83f5166548c2}</Project>
       <Name>refactor-me.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\refactor-me.Service\refactor-me.Service.csproj">
+      <Project>{6fd092aa-a88e-4c8a-90b5-3a6ead563f3c}</Project>
+      <Name>refactor-me.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

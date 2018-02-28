@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 using refactor_me.DTOs;
 
@@ -25,7 +26,12 @@ namespace refactor_me.Controllers
         [HttpGet]
         public Product GetProduct(Guid id)
         {
-            return this.ProductsService.GetProduct(id);
+            var product = this.ProductsService.GetProduct(id);
+
+            if (product == null)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+
+            return product;
         }
     }
 }

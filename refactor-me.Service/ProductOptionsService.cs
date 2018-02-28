@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Http;
 using AutoMapper;
 using refactor_me.Repository;
 
@@ -27,9 +25,6 @@ namespace refactor_me.Service
         public DTOs.ProductOption GetOption(Guid id)
         {
             var option = this.DBContext.ProductOptions.Find(id);
-
-            if (option == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
 
             return this.Mapper.Map<DTOs.ProductOption>(option);
         }
