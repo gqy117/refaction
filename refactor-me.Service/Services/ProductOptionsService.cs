@@ -39,14 +39,7 @@ namespace refactor_me.Service
 
         public void UpdateOption(Guid id, DTOs.ProductOption newOption)
         {
-            var option = this.DBContext.ProductOptions.Find(id);
-
-            if (option != null)
-            {
-                this.Mapper.Map(newOption, option);
-                this.DBContext.Entry(option).State = EntityState.Modified;
-                this.DBContext.SaveChanges();
-            }
+            this.CRUDHelper.UpdateById(this.DBContext.ProductOptions, id, newOption);
         }
 
         public void DeleteOption(Guid id)

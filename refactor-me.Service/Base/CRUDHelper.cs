@@ -4,17 +4,20 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using refactor_me.Repository;
 
 namespace refactor_me.Service
 {
     public class CRUDHelper
     {
-        public readonly RefactorContext DBContext;
+        private readonly RefactorContext DBContext;
+        private readonly IMapper Mapper;
 
-        public CRUDHelper(RefactorContext refactorContext)
+        public CRUDHelper(RefactorContext refactorContext, IMapper mapper)
         {
             this.DBContext = refactorContext;
+            this.Mapper = mapper;
         }
 
         public void DeleteById<T>(DbSet<T> entities, Guid id) where T : class
@@ -25,6 +28,18 @@ namespace refactor_me.Service
             {
                 entities.Remove(entity);
 
+                this.DBContext.SaveChanges();
+            }
+        }
+
+        public void UpdateById<TEntity, TDTO>(DbSet<TEntity> entities, Guid id, TDTO newEntity) where TEntity : class
+        {
+            var oldEntity = entities.Find(id);
+
+            if (oldEntity != null)
+            {
+                this.Mapper.Map(newEntity, oldEntity);
+                this.DBContext.Entry(oldEntity).State = EntityState.Modified;
                 this.DBContext.SaveChanges();
             }
         }

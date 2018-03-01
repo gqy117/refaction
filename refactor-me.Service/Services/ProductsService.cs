@@ -40,14 +40,7 @@ namespace refactor_me.Service
 
         public void Update(Guid id, DTOs.Product newProduct)
         {
-            var product = this.DBContext.Products.Find(newProduct.Id);
-
-            if (product != null)
-            {
-                this.Mapper.Map(newProduct, product);
-                this.DBContext.Entry(product).State = EntityState.Modified;
-                this.DBContext.SaveChanges();
-            }
+            this.CRUDHelper.UpdateById(this.DBContext.Products, id, newProduct);
         }
 
         public void Delete(Guid id)
