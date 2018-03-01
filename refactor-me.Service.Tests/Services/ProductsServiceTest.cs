@@ -12,17 +12,8 @@ using refactor_me.Repository;
 namespace refactor_me.Service.Tests
 {
     [TestFixture]
-    public class ProductsServiceTest
+    public class ProductsServiceTest : TestBase
     {
-        private RefactorContext DBContext;
-
-        [SetUp]
-        public void Init()
-        {
-            var connection = DbConnectionFactory.CreateTransient();
-            this.DBContext = new RefactorContext(connection);
-        }
-
         [Test]
         public void TestCase1()
         {
