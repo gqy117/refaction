@@ -1,0 +1,528 @@
+{
+	"info": {
+		"name": "ProductOptions",
+		"_postman_id": "043d2e50-860b-4e05-aa7f-93add461f04e",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Product Option",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"01234567-89ab-cdef-0123-456789abcdef\",\r\n  \"Name\": \"Product name\",\r\n  \"Description\": \"Product description\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product Option (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9cc98166-1439-450a-aeb2-4a9506aca41c",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(`Have 3 ProductOptions`, () => pm.expect(response.length).to.eql(3));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"description": "",
+			"item": [
+				{
+					"name": "Update Product Option",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"01234567-89ab-cdef-0123-456789abcdef\",\r\n  \"Name\": \"Product name2\",\r\n  \"Description\": \"Product description2\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/01234567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options",
+								"01234567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Option (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "026f06d2-eed6-45c2-a577-0201893f87c0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"const response = pm.response.json();",
+									"const item = response[1];",
+									"",
+									"pm.test(\"Name is updated\", () => pm.expect(item.Name).to.eql( \"Product name2\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Option Not Existing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"01234567-89ab-cdef-0123-456789abcdef\",\r\n  \"Name\": \"Product name2\",\r\n  \"Description\": \"Product description2\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/00000000-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options",
+								"00000000-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Option Not Existing (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "026f06d2-eed6-45c2-a577-0201893f87c0",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"const response = pm.response.json();",
+									"const item = response[1];",
+									"",
+									"pm.test(\"Name is updated\", () => pm.expect(item.Name).to.eql( \"Product name2\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"description": "",
+			"item": [
+				{
+					"name": "Delete Product Option",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/01234567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options",
+								"01234567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Option (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ddb7b472-0b3d-4e66-ab0d-a0f2fbf6a46f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(\"Have 2 ProductOptions\", () => pm.expect(response.length).to.eql(2));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Option Not Existing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/00000000-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options",
+								"00000000-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Product Option (Id)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ee00721-a058-4e5f-8360-3995bb68dd9b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(\"Name is White\", () => pm.expect(response.Name).to.eql(\"White\"));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options/0643ccf0-ab00-4862-b3c5-40e2731abcc9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options",
+								"0643ccf0-ab00-4862-b3c5-40e2731abcc9"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Option (ProductId)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2f9114ec-85ba-43b1-ba8e-9745a75b8648",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(\"Have 2 ProductOptions\", () => pm.expect(response.length).to.eql(2))"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3/options",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+								"options"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Option (Id) Not Existing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e1482d39-54f3-43f5-9494-e02976771fe1",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/00000076-35ee-4f0a-ae55-83023d2db1a3/options/0000ccf0-ab00-4862-b3c5-40e2731abcc9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"00000076-35ee-4f0a-ae55-83023d2db1a3",
+								"options",
+								"0000ccf0-ab00-4862-b3c5-40e2731abcc9"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
