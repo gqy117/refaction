@@ -19,16 +19,14 @@ namespace refactor_me.Service
 
         public IList<DTOs.Product> SearchByName(string name)
         {
-            var products = this.DBContext.Products.Where(x => x.Name == name).ToList();
-
-            return this.Mapper.Map<List<DTOs.Product>>(products);
+            return this.Mapper.Map<List<DTOs.Product>>(this.DBContext.Products.Where(x => x.Name == name));
         }
 
         public DTOs.Product GetProduct(Guid id)
         {
             var product = this.DBContext.Products.Find(id);
 
-            return this.Mapper.Map<DTOs.Product>(product);
+            return this.Mapper.Map<DTOs.Product>(this.DBContext.Products.Find(id));
         }
 
         public void Create(DTOs.Product product)

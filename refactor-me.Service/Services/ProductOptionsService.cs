@@ -16,17 +16,12 @@ namespace refactor_me.Service
 
         public IList<DTOs.ProductOption> GetOptions(Guid productId)
         {
-            var product = this.DBContext.Products.Find(productId);
-            var options = product.ProductOptions.ToList();
-
-            return this.Mapper.Map<List<DTOs.ProductOption>>(options);
+            return this.Mapper.Map<List<DTOs.ProductOption>>(this.DBContext.Products.Find(productId).ProductOptions);
         }
 
         public DTOs.ProductOption GetOption(Guid id)
         {
-            var option = this.DBContext.ProductOptions.Find(id);
-
-            return this.Mapper.Map<DTOs.ProductOption>(option);
+            return this.Mapper.Map<DTOs.ProductOption>(this.DBContext.ProductOptions.Find(id));
         }
 
         public void CreateOption(Guid productId, DTOs.ProductOption option)
