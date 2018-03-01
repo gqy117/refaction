@@ -1,0 +1,517 @@
+{
+	"info": {
+		"name": "Products",
+		"_postman_id": "7ae87ad6-5e5a-4838-8916-2778ab908d89",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add",
+			"description": "",
+			"item": [
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"01234567-89ab-cdef-0123-456789abcdef\",\r\n  \"Name\": \"Product name\",\r\n  \"Description\": \"Product description\",\r\n  \"Price\": 123.45,\r\n  \"DeliveryPrice\": 12.34\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:58123/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff42f270-182e-4694-a7a6-f32fe9993b64",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(\"Have 3 ProductOptions\", () => pm.expect(response.length).to.eql(3));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update",
+			"description": "",
+			"item": [
+				{
+					"name": "Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"01234567-89ab-cdef-0123-456789abcdef\",\r\n  \"Name\": \"Product name2\",\r\n  \"Description\": \"Product description2\",\r\n  \"Price\": 45,\r\n  \"DeliveryPrice\": 67\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/01234567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"01234567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d27ccbc-088d-4cd0-b1fd-3c5d53eca807",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"const response = pm.response.json();",
+									"const item = response;",
+									"",
+									"pm.test(\"Price is updated\", () => pm.expect(item.Price).to.eql(45));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/01234567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"01234567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Not Existing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Id\": \"00000000-89ab-cdef-0123-456789abcdef\",\r\n  \"Name\": \"Product name2\",\r\n  \"Description\": \"Product description2\",\r\n  \"Price\": 45,\r\n  \"DeliveryPrice\": 67\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/00000567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"00000567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product Not Existing (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "641a9261-b694-4268-a75a-6519e2c3df6b",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"const response = pm.response.json();",
+									"const item = response;",
+									"",
+									"pm.test(\"Price is updated\", () => pm.expect(item.Price).to.eql(45));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/01234567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"01234567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete",
+			"description": "",
+			"item": [
+				{
+					"name": "Delete Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/01234567-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"01234567-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product (Verify)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0056f188-942a-4156-9e85-3a8caa999e5e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(\"Have 2 ProductOptions\", () => pm.expect(response.length).to.eql(2));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product Not Existing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5aab5f74-3906-40d8-a1c3-81300cca0ed9",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 204\", () => pm.response.to.have.status(204));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:58123/products/00000000-89ab-cdef-0123-456789abcdef",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"00000000-89ab-cdef-0123-456789abcdef"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get",
+			"description": "",
+			"item": [
+				{
+					"name": "Get Product (Id)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2542a9e7-7cff-4bb6-88f5-d99c6273b262",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"var response = pm.response.json();",
+									"",
+									"pm.test(\"Name is Samsung Galaxy S7\", () => pm.expect(response.Name).to.eql(\"Samsung Galaxy S7\"));",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/8f2e9176-35ee-4f0a-ae55-83023d2db1a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"8f2e9176-35ee-4f0a-ae55-83023d2db1a3"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product (Id) Not Existing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "63a2c393-e7a3-406c-98b4-1da346041a8f",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 404\", () => pm.response.to.have.status(404));"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/00000076-35ee-4f0a-ae55-83023d2db1a3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								"00000076-35ee-4f0a-ae55-83023d2db1a3"
+							]
+						},
+						"description": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product (Name)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a0fe4796-76ea-42fa-b692-b4cfc26b204e",
+								"type": "text/javascript",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => pm.response.to.have.status(200));",
+									"",
+									"const response = pm.response.json();",
+									"const item = response[0];",
+									"",
+									"pm.test(\"Name is Samsung Galaxy S7\", () => pm.expect(item.Name).to.eql(\"Samsung Galaxy S7\"));",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:58123/products/?name=Samsung Galaxy S7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "58123",
+							"path": [
+								"products",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Samsung Galaxy S7",
+									"equals": true
+								}
+							]
+						},
+						"description": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
