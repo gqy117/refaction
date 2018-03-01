@@ -33,9 +33,7 @@ namespace refactor_me.Service
 
         public void Create(DTOs.Product product)
         {
-            this.DBContext.Products.Add(this.Mapper.Map<Product>(product));
-
-            this.DBContext.SaveChanges();
+            this.CRUDHelper.Create(this.DBContext.Products, product);
         }
 
         public void Update(Guid id, DTOs.Product newProduct)

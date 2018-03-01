@@ -20,16 +20,11 @@ namespace refactor_me.Service
             this.Mapper = mapper;
         }
 
-        public void DeleteById<T>(DbSet<T> entities, Guid id) where T : class
+        public void Create<TEntity, TDTO>(DbSet<TEntity> entities, TDTO dto) where TEntity : class
         {
-            var entity = entities.Find(id);
+            entities.Add(Mapper.Map<TEntity>(dto));
 
-            if (entity != null)
-            {
-                entities.Remove(entity);
-
-                this.DBContext.SaveChanges();
-            }
+            DBContext.SaveChanges();
         }
 
         public void UpdateById<TEntity, TDTO>(DbSet<TEntity> entities, Guid id, TDTO newEntity) where TEntity : class
@@ -40,6 +35,18 @@ namespace refactor_me.Service
             {
                 this.Mapper.Map(newEntity, oldEntity);
                 this.DBContext.Entry(oldEntity).State = EntityState.Modified;
+                this.DBContext.SaveChanges();
+            }
+        }
+
+        public void DeleteById<T>(DbSet<T> entities, Guid id) where T : class
+        {
+            var entity = entities.Find(id);
+
+            if (entity != null)
+            {
+                entities.Remove(entity);
+
                 this.DBContext.SaveChanges();
             }
         }
