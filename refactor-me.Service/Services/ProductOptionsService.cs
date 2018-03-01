@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using AutoMapper;
-using refactor_me.Repository;
 
 namespace refactor_me.Service
 {

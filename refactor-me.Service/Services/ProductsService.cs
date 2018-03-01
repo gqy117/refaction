@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using refactor_me.Repository;
 
 namespace refactor_me.Service
 {
@@ -24,8 +22,6 @@ namespace refactor_me.Service
 
         public DTOs.Product GetProduct(Guid id)
         {
-            var product = this.DBContext.Products.Find(id);
-
             return this.Mapper.Map<DTOs.Product>(this.DBContext.Products.Find(id));
         }
 
