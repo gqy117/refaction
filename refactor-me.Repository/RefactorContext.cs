@@ -1,3 +1,5 @@
+using System.Data.Common;
+
 namespace refactor_me.Repository
 {
     using System.Data.Entity;
@@ -6,6 +8,10 @@ namespace refactor_me.Repository
     {
         public RefactorContext()
             : base("name=RefactorContext")
+        {
+        }
+
+        public RefactorContext(DbConnection connection) : base(connection, true)
         {
         }
 

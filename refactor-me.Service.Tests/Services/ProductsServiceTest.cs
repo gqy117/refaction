@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Moq;
+using Effort;
+using Effort.Provider;
 using NUnit.Framework;
 using refactor_me.Repository;
 
@@ -12,6 +14,15 @@ namespace refactor_me.Service.Tests
     [TestFixture]
     public class ProductsServiceTest
     {
+        private RefactorContext DBContext;
+
+        [SetUp]
+        public void Init()
+        {
+            var connection = DbConnectionFactory.CreateTransient();
+            this.DBContext = new RefactorContext(connection);
+        }
+
         [Test]
         public void TestCase1()
         {
@@ -47,16 +58,14 @@ namespace refactor_me.Service.Tests
                 new Product { Id = new Guid("de1287c0-4b15-4a7b-9d8a-dd21b3cafec3"),Name = "Apple iPhone 6S",Description = "Newest mobile product from Apple.", Price = 1299.99M, DeliveryPrice = 15.99M},
             }.AsQueryable();
 
-            //var mockContext = new Mock<RefactorContext>();
-            //mockContext.Setup(c => c.Products).Returns(mockSet.Object);
+            var products1 = this.DBContext.Products.ToList();
+            this.DBContext.Products.Add(productSamsung);
 
-            RefactorContext dbContext = new RefactorContext();
-            dbContext.Products.Add(productSamsung);
+            this.DBContext.ProductOptions.Add(productOptionSamsung1);
+            this.DBContext.SaveChanges();
 
-            dbContext.ProductOptions.Add(productOptionSamsung1);
-            dbContext.SaveChanges();
-
-            var products = dbContext.Products.ToList();
+            var products2 = this.DBContext.Products.ToList();
+            var productOptions = this.DBContext.ProductOptions.ToList();
         }
     }
 }
