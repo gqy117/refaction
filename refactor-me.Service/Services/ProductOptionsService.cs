@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace refactor_me.Service
 {
@@ -11,7 +12,7 @@ namespace refactor_me.Service
 
         public IList<DTOs.ProductOption> GetOptions(Guid productId)
         {
-            return this.Mapper.Map<List<DTOs.ProductOption>>(this.DBContext.Products.Find(productId).ProductOptions);
+            return this.Mapper.Map<List<DTOs.ProductOption>>(this.DBContext.ProductOptions.Where(x=>x.ProductId == productId));
         }
 
         public DTOs.ProductOption GetOption(Guid id)
